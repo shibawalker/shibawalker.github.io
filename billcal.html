@@ -16,11 +16,11 @@
   </style>
 </head>
 <body>
-  <h1>綠波鎮新管理費計算器</h1>
+  <h1>綠波鎮2024新管理費計算器</h1>
   
   <label for="managementFee">現在繳交的管理費：</label>
   <input type="number" id="managementFee" required>
-  
+  <br>
   <label for="hasCarSpace">是否擁有車位：</label>
   <select id="hasCarSpace">
     <option value="true">是</option>
@@ -44,7 +44,7 @@
         futureManagementFee = Math.floor(futureManagementFee / 10) * 10; // 無條件捨去到十位數
         
         document.getElementById("currentBillingArea").textContent = "現在的計費坪數：" + currentBillingArea.toFixed(2);
-        document.getElementById("futureManagementFee").textContent = "未來的管理費用：" + futureManagementFee.toFixed(0);
+        document.getElementById("futureManagementFee").textContent = "2024年1月後的管理費用：" + futureManagementFee.toFixed(0);
         
       } else {
         var currentBillingArea = managementFee / 40;
