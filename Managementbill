@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>管理費計算器</title>
+  <style>
+    body {
+      font-family: Arial, Sans-serif;
+    }
+    input, select {
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 10px 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>綠波鎮新管理費計算器</h1>
+  
+  <label for="managementFee">現在繳交的管理費：</label>
+  <input type="number" id="managementFee" required>
+  
+  <label for="hasCarSpace">是否擁有車位：</label>
+  <select id="hasCarSpace">
+    <option value="true">是</option>
+    <option value="false">否</option>
+  </select>
+  
+  <button onclick="calculate()">計算</button>
+  
+  <h2>計算結果</h2>
+  <p id="currentBillingArea"></p>
+  <p id="futureManagementFee"></p>
+  
+  <script>
+    function calculate() {
+      var managementFee = parseInt(document.getElementById("managementFee").value);
+      var hasCarSpace = document.getElementById("hasCarSpace").value === "true";
+      
+      if (hasCarSpace) {
+        var currentBillingArea = (managementFee - 100) / 40;
+        var futureManagementFee = currentBillingArea * 50 + 100;
+        futureManagementFee = Math.floor(futureManagementFee / 10) * 10; // 無條件捨去到十位數
+        
+        document.getElementById("currentBillingArea").textContent = "現在的計費坪數：" + currentBillingArea.toFixed(2);
+        document.getElementById("futureManagementFee").textContent = "未來的管理費用：" + futureManagementFee.toFixed(0);
+        
+      } else {
+        var currentBillingArea = managementFee / 40;
+        var futureManagementFee = currentBillingArea * 50;
+        futureManagementFee = Math.floor(futureManagementFee / 10) * 10; // 無條件捨去到十位數
+        
+        document.getElementById("currentBillingArea").textContent = "現在的計費坪數：" + currentBillingArea.toFixed(2);
+        document.getElementById("futureManagementFee").textContent = "113年一月後的管理費用：" + futureManagementFee.toFixed(0);
+      }
+    }
+  </script>
+</body>
+</html>
