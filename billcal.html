@@ -27,6 +27,12 @@
     <option value="1">1</option>
     <option value="2">2</option>
   </select>
+  <br>
+  <label for="isBuildingK">是否為K棟住戶：</label>
+  <select id="isBuildingK">
+    <option value="false">否</option>
+    <option value="true">是</option>
+  </select>
   
   <button onclick="calculate()">計算</button>
   
@@ -38,12 +44,19 @@
     function calculate() {
       var managementFee = parseInt(document.getElementById("managementFee").value);
       var carSpaces = parseInt(document.getElementById("carSpaces").value);
+      var isBuildingK = document.getElementById("isBuildingK").value === "true";
       
       var deduction = carSpaces * 100; // 每個車位減100元
       
-      var currentBillingArea = (managementFee - deduction) / 40;
-      var futureManagementFee = currentBillingArea * 50 + deduction;
-      futureManagementFee = Math.floor(futureManagementFee / 10) * 10; // 無條件捨去到十位數
+      if (isBuildingK) {
+        var currentBillingArea = (managementFee - deduction) / 20;
+        var futureManagementFee = currentBillingArea * 25 + deduction;
+        futureManagementFee = Math.floor(futureManagementFee / 10) * 10; // 無條件捨去到十位數
+      } else {
+        var currentBillingArea = (managementFee - deduction) / 40;
+        var futureManagementFee = currentBillingArea * 50 + deduction;
+        futureManagementFee = Math.floor(futureManagementFee / 10) * 10; // 無條件捨去到十位數
+      }
       
       document.getElementById("currentBillingArea").textContent = "現在的計費坪數：" + currentBillingArea.toFixed(2);
       document.getElementById("futureManagementFee").textContent = "2024年1月後的管理費用：" + futureManagementFee.toFixed(0);
